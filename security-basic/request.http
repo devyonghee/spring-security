@@ -9,6 +9,11 @@ Authorization: Basic yong 12345
 GET http://localhost:8080/hello
 Authorization: Basic yo 12345
 
+
+###
+GET http://localhost:8080/ciao
+Authorization: Basic yo 12345
+
 ###
 
 GET http://localhost:8080/hello

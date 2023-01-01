@@ -12,7 +12,10 @@ import org.springframework.security.web.SecurityFilterChain
 
 
 @Configuration
-class SecurityConfig {
+class SecurityConfig(
+    private val successHandler: CustomAuthenticationSuccessHandler,
+    private val failureHandler: CustomAuthenticationFailureHandler
+) {
 
     @Bean
     fun userDetailService(passwordEncoder: PasswordEncoder): UserDetailsService {
@@ -32,9 +35,22 @@ class SecurityConfig {
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain? {
-        http.httpBasic()
+        http.formLogin()
+            .successHandler(successHandler)
+            .failureHandler(failureHandler)
+            .and()
+            .httpBasic()
+
         http.authorizeHttpRequests()
             .anyRequest().authenticated()
         return http.build()
     }
+
+//    @Bean
+//    fun initializingBean(): InitializingBean {
+//        return InitializingBean {
+//            SecurityContextHolder.setStrategyName(
+//                SecurityContextHolder.MODE_INHERITABLETHREADLOCAL)
+//        }
+//    }
 }
