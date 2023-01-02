@@ -1,4 +1,4 @@
-package me.devyonghee.securityapplication
+package me.devyonghee.securityapplication.domain
 
 enum class EncryptionAlgorithm {
     BCRYPT, SCRYPT

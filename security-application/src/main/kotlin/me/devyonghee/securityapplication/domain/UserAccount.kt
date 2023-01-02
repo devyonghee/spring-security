@@ -1,9 +1,9 @@
-package me.devyonghee.securityapplication
+package me.devyonghee.securityapplication.domain
 
 import jakarta.persistence.*
 
 @Entity
-class User(
+class UserAccount(
     val username: String,
     val password: String,
 

@@ -1,11 +1,11 @@
-package me.devyonghee.securityapplication
+package me.devyonghee.securityapplication.domain
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 class CustomUserDetails(
-    val user: User
+    val user: UserAccount
 ) : UserDetails {
 
     override fun getAuthorities(): Collection<GrantedAuthority> {

@@ -1,4 +1,4 @@
-package me.devyonghee.securityapplication
+package me.devyonghee.securityapplication.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -26,7 +26,7 @@ class SecurityConfig {
             .defaultSuccessUrl("/main", true)
             .and()
             .authorizeHttpRequests()
-            .anyRequest().authenticated()
+            .anyRequest().hasAuthority("read")
             .and()
             .build()
     }
