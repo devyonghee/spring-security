@@ -1,2 +1,2 @@
 rootProject.name = "spring-security"
-include("security-basic")
+include("security-basic", "security-application")
