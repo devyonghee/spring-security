@@ -20,11 +20,18 @@ class SecurityConfig(
     @Bean
     fun userDetailService(passwordEncoder: PasswordEncoder): UserDetailsService {
         val userDetailsService = InMemoryUserDetailsManager()
-        val user = User.withUsername("yong")
+        val user1 = User.withUsername("yong")
             .password(passwordEncoder.encode("12345"))
-            .authorities("read")
+            // .authorities(Authority.READ)    // access("hasAuthority('READ') and !hasAuthority('DELETE')")
+            .roles("ADMIN")
             .build()
-        userDetailsService.createUser(user)
+
+        val user2 = User.withUsername("jane")
+            .password(passwordEncoder.encode("12345"))
+            .roles("MANAGER")
+            .build()
+        userDetailsService.createUser(user1)
+        userDetailsService.createUser(user2)
         return userDetailsService
     }
 
@@ -42,6 +49,10 @@ class SecurityConfig(
             .httpBasic()
 
         http.authorizeHttpRequests()
+//            .anyRequest().hasAuthority(Authority.READ.name)
+            .requestMatchers("/hello").hasRole("ADMIN")
+            .requestMatchers("/ciao").hasRole("MANAGER")
+            .requestMatchers("/product/{code:^[0-9]*$}").permitAll() // /{param:regex}
             .anyRequest().authenticated()
         return http.build()
     }
