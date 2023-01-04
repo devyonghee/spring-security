@@ -16,7 +16,7 @@ class User(
         return password
     }
 
-    override fun getAuthorities(): Collection<out GrantedAuthority> {
+    override fun getAuthorities(): Collection<GrantedAuthority> {
         return listOf(Authority.READ)
     }
 
