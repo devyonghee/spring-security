@@ -1,0 +1,8 @@
+GET http://localhost:8080/hello
+X-IDENTIFIER: 12345
+
+###
+
+POST http://localhost:8080/hello
+X-IDENTIFIER: 123456
+X-CSRF-TOKEN:
