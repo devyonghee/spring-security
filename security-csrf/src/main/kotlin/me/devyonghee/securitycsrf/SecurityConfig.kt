@@ -13,10 +13,10 @@ class SecurityConfig {
         http: HttpSecurity,
         customCsrfTokenRepository: CustomCsrfTokenRepository
     ): SecurityFilterChain {
-        return http.csrf {
-            it.csrfTokenRepository(customCsrfTokenRepository)
-            it.ignoringRequestMatchers("/ciao")
-        }.authorizeHttpRequests()
+        return http.csrf()
+            .csrfTokenRepository(customCsrfTokenRepository)
+            .and()
+            .authorizeHttpRequests()
             .anyRequest().permitAll()
             .and()
             .build()

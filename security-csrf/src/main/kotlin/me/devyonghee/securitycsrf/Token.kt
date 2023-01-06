@@ -13,4 +13,8 @@ class Token(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null
 ) {
+
+    fun changeToken(token: String) {
+        this.token = token;
+    }
 }
