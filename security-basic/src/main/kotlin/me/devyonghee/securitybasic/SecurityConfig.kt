@@ -42,19 +42,24 @@ class SecurityConfig(
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain? {
-        http.formLogin()
+        http.csrf { csrf ->
+            csrf.ignoringRequestMatchers("/ciao")
+        }
+        return http
+            .formLogin()
             .successHandler(successHandler)
             .failureHandler(failureHandler)
             .and()
             .httpBasic()
-
-        http.authorizeHttpRequests()
+            .and()
+            .authorizeHttpRequests()
 //            .anyRequest().hasAuthority(Authority.READ.name)
             .requestMatchers("/hello").hasRole("ADMIN")
             .requestMatchers("/ciao").hasRole("MANAGER")
             .requestMatchers("/product/{code:^[0-9]*$}").permitAll() // /{param:regex}
             .anyRequest().authenticated()
-        return http.build()
+            .and()
+            .build()
     }
 
 //    @Bean
