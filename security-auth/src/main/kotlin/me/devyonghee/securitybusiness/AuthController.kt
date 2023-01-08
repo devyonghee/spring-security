@@ -1,4 +1,4 @@
-package me.devyonghee.securityauth
+package me.devyonghee.securitybusiness
 
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.web.bind.annotation.PostMapping

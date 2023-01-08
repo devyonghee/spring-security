@@ -1,4 +1,4 @@
-package me.devyonghee.securityauth
+package me.devyonghee.securitybusiness
 
 import java.security.SecureRandom
 

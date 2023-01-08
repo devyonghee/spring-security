@@ -1,4 +1,4 @@
-package me.devyonghee.securityauth
+package me.devyonghee.securitybusiness
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

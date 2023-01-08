@@ -1,4 +1,4 @@
-package me.devyonghee.securityauth
+package me.devyonghee.securitybusiness
 
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.crypto.password.PasswordEncoder

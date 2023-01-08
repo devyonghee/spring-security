@@ -1,4 +1,4 @@
-package me.devyonghee.securityauth
+package me.devyonghee.securitybusiness
 
 import org.springframework.data.jpa.repository.JpaRepository
 
