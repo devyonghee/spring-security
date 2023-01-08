@@ -1,4 +1,4 @@
-package me.devyonghee.securityjjwt
+package me.devyonghee.securityauth
 
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.crypto.password.PasswordEncoder

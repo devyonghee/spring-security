@@ -1,4 +1,4 @@
-package me.devyonghee.securityjjwt
+package me.devyonghee.securityauth
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

@@ -1,4 +1,4 @@
-package me.devyonghee.securityjjwt
+package me.devyonghee.securityauth
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Id

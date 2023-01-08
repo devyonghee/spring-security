@@ -1,4 +1,4 @@
-package me.devyonghee.securityjjwt
+package me.devyonghee.securityauth
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
