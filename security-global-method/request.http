@@ -1,0 +1,35 @@
+GET http://localhost:8080/hello
+Authorization: Basic readUser password
+//expected 200
+
+###
+
+GET http://localhost:8080/hello
+Authorization: Basic writeUser password
+//expected 403
+
+###
+
+GET http://localhost:8080/secret/names/readUser
+Authorization: Basic readUser password
+//expected 200
+
+###
+
+GET http://localhost:8080/secret/names/writeUser
+Authorization: Basic readUser password
+//expected 403
+
+###
+
+GET http://localhost:8080/book/details/readUser
+Authorization: Basic readUser password
+//expected 200
+
+###
+
+GET http://localhost:8080/book/details/writeUser
+Authorization: Basic writeUser password
+//expected 403
+
+
