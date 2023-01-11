@@ -32,4 +32,22 @@ GET http://localhost:8080/book/details/writeUser
 Authorization: Basic writeUser password
 //expected 403
 
+###
+
+GET http://localhost:8080/documents/abc123
+Authorization: Basic admin password
+//expected 200
+
+###
+
+GET http://localhost:8080/documents/abc123
+Authorization: Basic manager password
+//expected 403
+
+###
+
+GET http://localhost:8080/documents/asd555
+Authorization: Basic manager password
+//expected 403
+
 
