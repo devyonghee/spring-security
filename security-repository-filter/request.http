@@ -1,0 +1,19 @@
+GET http://localhost:8080/products/c
+Authorization: Basic readUser password
+
+###
+
+GET http://localhost:8080/products/c
+Authorization: Basic writeUser password
+
+###
+
+GET http://localhost:8080/products/query/c
+Authorization: Basic readUser password
+
+###
+
+GET http://localhost:8080/products/query/c
+Authorization: Basic writeUser password
+
+###
