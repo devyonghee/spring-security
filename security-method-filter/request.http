@@ -1,0 +1,11 @@
+GET http://localhost:8080/sell
+Authorization: Basic readUser password
+//expected 200
+
+###
+
+GET http://localhost:8080/sell
+Authorization: Basic writeUser password
+//expected 403
+
+###
