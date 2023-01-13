@@ -9,12 +9,18 @@ class ProductController(
 ) {
     @GetMapping("/sell")
     fun sellProduct(): List<Product> {
-        return productService.sellProducts(products)
+        return productService.sellProducts(
+            mutableListOf(
+                Product("beer", "readUser"),
+                Product("candy", "readUser"),
+                Product("chocolate", "writeUser")
+            )
+        )
+    }
+
+    @GetMapping("/find")
+    fun findProducts(): List<Product> {
+        return productService.findProducts()
     }
 }
 
-private val products = mutableListOf(
-    Product("beer", "readUser"),
-    Product("candy", "readUser"),
-    Product("chocolate", "writeUser")
-)
