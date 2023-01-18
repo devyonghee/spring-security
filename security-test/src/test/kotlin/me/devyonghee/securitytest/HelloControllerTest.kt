@@ -55,4 +55,12 @@ class HelloControllerTest {
             .andExpect(content().string("Hello, john!"))
             .andExpect(status().isOk)
     }
+
+    @Test
+    @WithCustomUser("mary")
+    fun helloCustomAuthenticatedMary() {
+        mockMvc.perform(get("/hello"))
+            .andExpect(content().string("Hello, mary!"))
+            .andExpect(status().isOk)
+    }
 }
