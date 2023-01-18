@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.test.context.support.WithMockUser
+import org.springframework.security.test.context.support.WithUserDetails
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -44,6 +45,14 @@ class HelloControllerTest {
     fun helloAuthenticatedWithMary() {
         mockMvc.perform(get("/hello").with(user("mary")))
             .andExpect(content().string("Hello, mary!"))
+            .andExpect(status().isOk)
+    }
+
+    @Test
+    @WithUserDetails("john")
+    fun helloAuthenticatedJohn() {
+        mockMvc.perform(get("/hello"))
+            .andExpect(content().string("Hello, john!"))
             .andExpect(status().isOk)
     }
 }
