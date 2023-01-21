@@ -3,20 +3,41 @@ package me.devyonghee.securitytest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
-class SecurityConfig {
+class SecurityConfig(
+    private val successHandler: CustomAuthenticationSuccessHandler
+) {
 
     @Bean
     fun userDetailsService(): UserDetailsService {
-        val john = User.withUsername("john")
+        val readUser = User.withUsername("readUser")
             .password("{noop}password")
             .authorities("read")
             .build()
-        return InMemoryUserDetailsManager(john)
+        val writeUser = User.withUsername("writeUser")
+            .password("{noop}password")
+            .authorities("write")
+            .build()
+        return InMemoryUserDetailsManager(readUser, writeUser)
+    }
+
+    @Bean
+    fun filterChain(http: HttpSecurity): SecurityFilterChain {
+        return http.formLogin()
+            .successHandler(successHandler)
+            .and()
+            .httpBasic()
+            .and()
+            .authorizeHttpRequests()
+            .anyRequest().authenticated()
+            .and()
+            .build()
     }
 }
