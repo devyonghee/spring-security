@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")

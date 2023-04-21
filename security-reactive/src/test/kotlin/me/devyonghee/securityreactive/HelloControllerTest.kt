@@ -14,7 +14,7 @@ import org.springframework.test.web.reactive.server.WebTestClient
 class HelloControllerTest {
 
     @Autowired
-    private lateinit var client: WebTestClient
+    lateinit var client: WebTestClient
 
     @Test
     @WithMockUser(roles = ["ADMIN"])
