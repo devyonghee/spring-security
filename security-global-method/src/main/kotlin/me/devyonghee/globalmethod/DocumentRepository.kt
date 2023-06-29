@@ -7,7 +7,7 @@ class DocumentRepository {
     private val documents = mapOf(
         "abc123" to Document("admin"),
         "qwe123" to Document("admin"),
-        "asd555" to Document("manager"),
+        "asd555" to Document("manager")
     )
 
     fun findDocument(code: String): Document {

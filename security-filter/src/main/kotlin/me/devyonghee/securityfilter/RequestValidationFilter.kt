@@ -5,7 +5,6 @@ import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.web.filter.OncePerRequestFilter
 
-
 class RequestValidationFilter : OncePerRequestFilter() {
 
     override fun doFilterInternal(

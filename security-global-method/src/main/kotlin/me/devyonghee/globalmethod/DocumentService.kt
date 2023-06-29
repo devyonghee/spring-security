@@ -10,6 +10,6 @@ class DocumentService(
 
     @PostAuthorize("hasPermission(#code, 'document', 'ROLE_admin')")
     fun getDocument(code: String): Document {
-        return documentRepository.findDocument(code);
+        return documentRepository.findDocument(code)
     }
 }

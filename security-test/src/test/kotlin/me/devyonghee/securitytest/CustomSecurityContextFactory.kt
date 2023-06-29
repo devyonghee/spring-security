@@ -11,7 +11,7 @@ class CustomSecurityContextFactory() : WithSecurityContextFactory<WithCustomUser
     override fun createSecurityContext(withCustomUser: WithCustomUser): SecurityContext {
         val context: SecurityContext = SecurityContextHolder.createEmptyContext()
         context.authentication =
-            UsernamePasswordAuthenticationToken(Principal { withCustomUser.username }, null, null);
+            UsernamePasswordAuthenticationToken(Principal { withCustomUser.username }, null, null)
         return context
     }
 }

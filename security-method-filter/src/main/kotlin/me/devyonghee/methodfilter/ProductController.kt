@@ -23,4 +23,3 @@ class ProductController(
         return productService.findProducts()
     }
 }
-

@@ -20,7 +20,6 @@ class SecurityConfig(
             .cors().disable()
             .csrf().disable()
             .formLogin().disable()
-
             .authorizeHttpRequests()
             .requestMatchers(HttpMethod.POST, "/hello").hasAuthority(
                 RequestIdValidationFilter.REQUEST_HEADER_AUTHORITY.authority
@@ -37,7 +36,6 @@ class SecurityConfig(
                 response.writer.write("body : ${accessDeniedException.message}")
             }
             .and()
-
             .addFilterAfter(requestIdValidationFilter, ExceptionTranslationFilter::class.java)
             .build()
         return build

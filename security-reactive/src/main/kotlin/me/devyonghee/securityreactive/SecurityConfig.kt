@@ -57,7 +57,6 @@ class SecurityConfig {
 
     private fun requestPath(context: AuthorizationContext): String {
         return context.exchange.request.path.value()
-
     }
 
     private fun Mono<Authentication>.isAdmin(): Mono<AuthorizationDecision> {

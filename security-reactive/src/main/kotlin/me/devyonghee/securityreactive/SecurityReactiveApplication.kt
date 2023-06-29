@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class SecurityReactiveApplication
 
 fun main(args: Array<String>) {
-    runApplication<SecurityReactiveApplication>(*args);
+    runApplication<SecurityReactiveApplication>(*args)
 }

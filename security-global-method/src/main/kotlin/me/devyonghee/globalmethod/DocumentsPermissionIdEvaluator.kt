@@ -15,7 +15,7 @@ class DocumentsPermissionIdEvaluator(
         target: Any,
         permission: Any
     ): Boolean {
-        return false;
+        return false
     }
 
     override fun hasPermission(

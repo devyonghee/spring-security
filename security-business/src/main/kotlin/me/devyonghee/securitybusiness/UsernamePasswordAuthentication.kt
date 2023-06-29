@@ -7,5 +7,4 @@ class UsernamePasswordAuthentication(
     principal: Any,
     credentials: Any? = null,
     authorities: Collection<out GrantedAuthority> = emptyList()
-) : UsernamePasswordAuthenticationToken(principal, credentials, authorities) {
-}
+) : UsernamePasswordAuthenticationToken(principal, credentials, authorities)

@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 
-
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 class SecurityConfig(

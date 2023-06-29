@@ -23,4 +23,3 @@ class SecurityConfig : GlobalAuthenticationConfigurerAdapter() {
         return SecurityEvaluationContextExtension()
     }
 }
-

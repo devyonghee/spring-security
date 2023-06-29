@@ -7,5 +7,4 @@ class OtpAuthentication(
     principal: Any,
     credentials: Any,
     authorities: Collection<out GrantedAuthority> = emptyList()
-) : UsernamePasswordAuthenticationToken(principal, credentials, authorities) {
-}
+) : UsernamePasswordAuthenticationToken(principal, credentials, authorities)

@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class SecurityGlobalMethodApplication
 
 fun main(args: Array<String>) {
-    runApplication<SecurityGlobalMethodApplication>(*args);
+    runApplication<SecurityGlobalMethodApplication>(*args)
 }

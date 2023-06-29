@@ -15,6 +15,6 @@ class Token(
 ) {
 
     fun changeToken(token: String) {
-        this.token = token;
+        this.token = token
     }
 }

@@ -10,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
-
 @Component
 class RequestIdValidationFilter : OncePerRequestFilter() {
 
@@ -31,7 +30,7 @@ class RequestIdValidationFilter : OncePerRequestFilter() {
             return
         }
 
-        throw DisabledException("not allowed");
+        throw DisabledException("not allowed")
     }
 
     companion object {

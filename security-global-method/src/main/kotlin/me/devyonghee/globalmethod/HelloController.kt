@@ -15,6 +15,6 @@ class HelloController(
 
     @GetMapping("/secret/names/{name}")
     fun names(@PathVariable name: String): List<String> {
-        return nameService.getSecretNames(name);
+        return nameService.getSecretNames(name)
     }
 }

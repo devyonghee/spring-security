@@ -24,7 +24,7 @@ class SecurityConfig {
     }
 
     fun clientRepository(): ClientRegistrationRepository {
-        return InMemoryClientRegistrationRepository(clientRegistration());
+        return InMemoryClientRegistrationRepository(clientRegistration())
     }
 
     fun clientRegistration(): ClientRegistration {

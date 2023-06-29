@@ -10,6 +10,4 @@ class TestController {
     fun test(): String {
         return "test"
     }
-
-
 }

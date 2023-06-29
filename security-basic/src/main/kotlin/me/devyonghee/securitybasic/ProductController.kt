@@ -9,6 +9,6 @@ class ProductController {
 
     @GetMapping("/product/{code}")
     fun productCode(@PathVariable code: String): String {
-        return code;
+        return code
     }
 }

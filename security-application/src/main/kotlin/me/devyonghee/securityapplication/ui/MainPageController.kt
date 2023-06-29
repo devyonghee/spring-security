@@ -11,7 +11,6 @@ class MainPageController(
     private val productService: ProductService
 ) {
 
-
     @GetMapping("/main")
     fun main(authentication: Authentication, model: Model): String {
         model.addAttribute("username", authentication.name)

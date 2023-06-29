@@ -9,7 +9,7 @@ class ProductService {
 
     @PreFilter("filterObject.owner == authentication.name")
     fun sellProducts(products: List<Product>): List<Product> {
-        return products;
+        return products
     }
 
     @PostFilter("filterObject.owner == authentication.name")

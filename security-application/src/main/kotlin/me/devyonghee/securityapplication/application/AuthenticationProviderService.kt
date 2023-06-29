@@ -23,7 +23,7 @@ class AuthenticationProviderService(
     }
 
     override fun authenticate(authentication: Authentication): Authentication {
-        val username = authentication.name;
+        val username = authentication.name
         val password = authentication.credentials.toString()
 
         val user = jpaUserDetailsService.loadUserByUsername(username)
@@ -35,7 +35,9 @@ class AuthenticationProviderService(
     }
 
     private fun checkPassword(
-        user: CustomUserDetails, password: String, passwordEncoder: PasswordEncoder
+        user: CustomUserDetails,
+        password: String,
+        passwordEncoder: PasswordEncoder
     ): Authentication {
         if (!passwordEncoder.matches(password, user.password)) {
             throw BadCredentialsException("bad credentials")
