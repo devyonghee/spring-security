@@ -16,7 +16,6 @@ class WhiteUrlEndpoint(
     @JoinColumn(name = "url_endpoint_id")
     val urlEndpoint: UrlEndpoint,
     val createdAt: LocalDateTime = LocalDateTime.now(),
-    val createdBy: String,
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int = 0,
