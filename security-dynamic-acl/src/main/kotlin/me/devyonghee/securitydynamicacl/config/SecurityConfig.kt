@@ -10,14 +10,14 @@ class SecurityConfig {
 
     @Bean
     fun http(http: HttpSecurity): SecurityFilterChain {
-        http.httpBasic().disable()
-        http.cors().disable()
-        http.csrf().disable()
+        http.httpBasic { it.disable() }
+        http.cors { it.disable() }
+        http.csrf { it.disable() }
+        http.formLogin { it.disable() }
 
-        http.formLogin().disable()
-
-        http.authorizeHttpRequests()
-            .anyRequest().anonymous()
+        http.authorizeHttpRequests {
+            it.requestMatchers("/books/**").hasRole("ADMIN")
+        }
 
         return http.build()
     }

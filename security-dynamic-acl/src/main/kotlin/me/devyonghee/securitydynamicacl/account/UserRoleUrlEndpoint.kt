@@ -7,6 +7,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import java.time.LocalDateTime
+import me.devyonghee.securitydynamicacl.urlendpoint.HttpMethod
 import me.devyonghee.securitydynamicacl.urlendpoint.UrlEndpoint
 
 @Entity
@@ -24,4 +25,8 @@ class UserRoleUrlEndpoint(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int = 0,
-)
+) {
+    val httpMethod: HttpMethod = urlEndpoint.httpMethod
+    val urlPattern: String = urlEndpoint.urlPattern
+    val role: UserRole.Role = userRole.role
+}
