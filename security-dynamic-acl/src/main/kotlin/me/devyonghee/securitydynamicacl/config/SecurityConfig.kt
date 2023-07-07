@@ -1,4 +1,4 @@
-package me.devyonghee.securitydynamicacl
+package me.devyonghee.securitydynamicacl.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -17,7 +17,7 @@ class SecurityConfig {
         http.formLogin().disable()
 
         http.authorizeHttpRequests()
-            .anyRequest().authenticated()
+            .anyRequest().anonymous()
 
         return http.build()
     }

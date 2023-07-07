@@ -1,4 +1,4 @@
-package me.devyonghee.securitydynamicacl.urlendpoint.domain
+package me.devyonghee.securitydynamicacl.account
 
 import org.springframework.data.jpa.repository.JpaRepository
 

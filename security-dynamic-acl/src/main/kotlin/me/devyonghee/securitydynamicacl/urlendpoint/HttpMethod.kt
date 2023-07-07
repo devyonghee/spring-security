@@ -1,4 +1,4 @@
-package me.devyonghee.securitydynamicacl.urlendpoint.domain
+package me.devyonghee.securitydynamicacl.urlendpoint
 
 enum class HttpMethod {
     ALL,
