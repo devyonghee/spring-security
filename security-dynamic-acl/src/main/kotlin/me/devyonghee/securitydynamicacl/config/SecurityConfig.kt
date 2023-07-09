@@ -1,25 +1,52 @@
 package me.devyonghee.securitydynamicacl.config
 
+import me.devyonghee.securitydynamicacl.account.UserRole
+import me.devyonghee.securitydynamicacl.urlendpoint.UserRoleUrlEndpointService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 class SecurityConfig {
 
     @Bean
-    fun http(http: HttpSecurity): SecurityFilterChain {
+    fun http(http: HttpSecurity, userRoleUrlEndpointService: UserRoleUrlEndpointService): SecurityFilterChain {
         http.httpBasic { it.disable() }
         http.cors { it.disable() }
         http.csrf { it.disable() }
-        http.formLogin { it.disable() }
 
         http.authorizeHttpRequests {
-            it.requestMatchers("/books/**").hasRole("ADMIN")
+            it.anyRequest().authenticated()
         }
 
         return http.build()
     }
 
+    @Bean
+    fun userDetailService(passwordEncoder: PasswordEncoder): UserDetailsService {
+        val userDetailsService = InMemoryUserDetailsManager()
+        val user1 = User.withUsername("yong")
+            .password(passwordEncoder.encode("12345"))
+            .roles(UserRole.Role.ADMIN.name)
+            .build()
+
+        val user2 = User.withUsername("client")
+            .password(passwordEncoder.encode("12345"))
+            .roles(UserRole.Role.CLIENT.name)
+            .build()
+        userDetailsService.createUser(user1)
+        userDetailsService.createUser(user2)
+        return userDetailsService
+    }
+
+    @Bean
+    fun passwordEncoder(): PasswordEncoder {
+        return BCryptPasswordEncoder()
+    }
 }
