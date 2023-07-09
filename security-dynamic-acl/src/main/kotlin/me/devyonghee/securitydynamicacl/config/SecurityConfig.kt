@@ -11,12 +11,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.access.intercept.AuthorizationFilter
+import org.springframework.security.web.authentication.AuthenticationFilter
 
 @Configuration
-class SecurityConfig {
-
+class SecurityConfig(
+    private val userRoleUrlEndpointService: UserRoleUrlEndpointService,
+) {
     @Bean
-    fun http(http: HttpSecurity, userRoleUrlEndpointService: UserRoleUrlEndpointService): SecurityFilterChain {
+    fun http(http: HttpSecurity): SecurityFilterChain {
         http.httpBasic { it.disable() }
         http.cors { it.disable() }
         http.csrf { it.disable() }
@@ -25,7 +28,12 @@ class SecurityConfig {
             it.anyRequest().authenticated()
         }
 
+        http.addFilterBefore(databaseAuthorizationFilter(), AuthenticationFilter::class.java)
         return http.build()
+    }
+
+    fun databaseAuthorizationFilter(): AuthorizationFilter {
+        return AuthorizationFilter(DatabaseRequestMatcherAuthorizationManager(userRoleUrlEndpointService))
     }
 
     @Bean

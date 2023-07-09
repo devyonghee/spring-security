@@ -2,8 +2,10 @@ package me.devyonghee.securitydynamicacl.config
 
 import jakarta.servlet.http.HttpServletRequest
 import java.util.function.Supplier
+import me.devyonghee.securitydynamicacl.account.UserRole
 import me.devyonghee.securitydynamicacl.urlendpoint.HttpMethod
 import me.devyonghee.securitydynamicacl.urlendpoint.UserRoleUrlEndpointService
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy
 import org.springframework.security.authorization.AuthorityAuthorizationManager
 import org.springframework.security.authorization.AuthorizationDecision
 import org.springframework.security.authorization.AuthorizationManager
@@ -34,7 +36,11 @@ class DatabaseRequestMatcherAuthorizationManager(
             }.map { (matcher, endpoints) ->
                 RequestMatcherEntry(
                     matcher,
-                    AuthorityAuthorizationManager.hasAnyRole(*endpoints.map { it.role.name }.toTypedArray())
+                    AuthorityAuthorizationManager.hasAnyRole<RequestAuthorizationContext>(
+                        *endpoints.map { it.role.name }.toTypedArray()
+                    ).apply {
+                        setRoleHierarchy(ROLE_HIERARCHY)
+                    }
                 )
             }
     }
@@ -55,5 +61,6 @@ class DatabaseRequestMatcherAuthorizationManager(
 
     companion object {
         private val DENY: AuthorizationDecision = AuthorizationDecision(false)
+        private val ROLE_HIERARCHY: RoleHierarchy = LowestBaseRoleHierarchy("ROLE_${UserRole.Role.ANONYMOUS}")
     }
 }

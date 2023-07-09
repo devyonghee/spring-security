@@ -15,6 +15,7 @@ class UserRole(
 ) {
     enum class Role {
         ADMIN,
-        CLIENT
+        CLIENT,
+        ANONYMOUS,
     }
 }
