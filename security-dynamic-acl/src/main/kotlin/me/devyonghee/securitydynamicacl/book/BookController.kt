@@ -22,7 +22,7 @@ class BookController(private val bookService: BookService) {
     }
 
     @GetMapping("/books")
-    fun books(): ResponseEntity<Collection<Book?>?> {
+    fun books(): ResponseEntity<Collection<Book>> {
         return ResponseEntity.ok(bookService.books())
     }
 

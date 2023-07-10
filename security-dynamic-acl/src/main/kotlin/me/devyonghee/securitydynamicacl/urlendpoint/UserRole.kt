@@ -1,4 +1,4 @@
-package me.devyonghee.securitydynamicacl.account
+package me.devyonghee.securitydynamicacl.urlendpoint
 
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType

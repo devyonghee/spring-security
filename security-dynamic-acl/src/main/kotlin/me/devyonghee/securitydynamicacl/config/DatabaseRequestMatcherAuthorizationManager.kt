@@ -2,10 +2,10 @@ package me.devyonghee.securitydynamicacl.config
 
 import jakarta.servlet.http.HttpServletRequest
 import java.util.function.Supplier
-import me.devyonghee.securitydynamicacl.account.UserRole
 import me.devyonghee.securitydynamicacl.urlendpoint.HttpMethod
+import me.devyonghee.securitydynamicacl.urlendpoint.UserRole
+import me.devyonghee.securitydynamicacl.urlendpoint.UserRoleUrlEndpoint
 import me.devyonghee.securitydynamicacl.urlendpoint.UserRoleUrlEndpointService
-import org.springframework.security.access.hierarchicalroles.RoleHierarchy
 import org.springframework.security.authorization.AuthorityAuthorizationManager
 import org.springframework.security.authorization.AuthorizationDecision
 import org.springframework.security.authorization.AuthorizationManager
@@ -26,23 +26,21 @@ class DatabaseRequestMatcherAuthorizationManager(
         reload()
     }
 
-    final fun reload() {
+    fun reload() {
         mappings = userRoleUrlEndpointService.all()
             .groupBy {
                 when (it.httpMethod) {
                     HttpMethod.ALL -> AntPathRequestMatcher(it.urlPattern)
                     else -> AntPathRequestMatcher(it.urlPattern, it.httpMethod.name)
                 }
-            }.map { (matcher, endpoints) ->
-                RequestMatcherEntry(
-                    matcher,
-                    AuthorityAuthorizationManager.hasAnyRole<RequestAuthorizationContext>(
-                        *endpoints.map { it.role.name }.toTypedArray()
-                    ).apply {
-                        setRoleHierarchy(ROLE_HIERARCHY)
-                    }
-                )
-            }
+            }.map { (matcher, endpoints) -> RequestMatcherEntry(matcher, authorizationManager(endpoints)) }
+    }
+
+    private fun authorizationManager(endpoints: Collection<UserRoleUrlEndpoint>): AuthorizationManager<RequestAuthorizationContext> {
+        if (endpoints.any { it.role == UserRole.Role.ANONYMOUS }) {
+            return AuthorizationManager { _, _ -> AuthorizationDecision(true) }
+        }
+        return AuthorityAuthorizationManager.hasAnyRole(*endpoints.map { it.role.name }.toTypedArray())
     }
 
     override fun check(
@@ -61,6 +59,5 @@ class DatabaseRequestMatcherAuthorizationManager(
 
     companion object {
         private val DENY: AuthorizationDecision = AuthorizationDecision(false)
-        private val ROLE_HIERARCHY: RoleHierarchy = LowestBaseRoleHierarchy("ROLE_${UserRole.Role.ANONYMOUS}")
     }
 }

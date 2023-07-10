@@ -1,4 +1,4 @@
-package me.devyonghee.securitydynamicacl.account
+package me.devyonghee.securitydynamicacl.urlendpoint
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -11,20 +11,30 @@ import jakarta.persistence.Table
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "account_user_role")
-class AccountUserRole(
+@Table(name = "user_role_url_endpoint")
+class UserRoleUrlEndpoint(
     @ManyToOne(optional = false)
-    @JoinColumn(name = "account_id")
-    val account: Account,
+    @JoinColumn(name = "url_endpoint_id")
+    val urlEndpoint: UrlEndpoint,
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_role")
     val userRole: UserRole,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
 
     @Id
-    @Column(name = "account_user_role_id")
+    @Column(name = "user_role_url_endpoint_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int = 0,
-)
+) {
+    val httpMethod: HttpMethod
+        get() = urlEndpoint.httpMethod
+
+    val urlPattern: String
+        get() = urlEndpoint.urlPattern
+
+    val role: UserRole.Role
+        get() = userRole.role
+}

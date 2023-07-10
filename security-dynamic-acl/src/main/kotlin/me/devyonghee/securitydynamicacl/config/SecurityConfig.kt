@@ -1,6 +1,6 @@
 package me.devyonghee.securitydynamicacl.config
 
-import me.devyonghee.securitydynamicacl.account.UserRole
+import me.devyonghee.securitydynamicacl.urlendpoint.UserRole
 import me.devyonghee.securitydynamicacl.urlendpoint.UserRoleUrlEndpointService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.access.intercept.AuthorizationFilter
-import org.springframework.security.web.authentication.AuthenticationFilter
 
 @Configuration
 class SecurityConfig(
@@ -25,10 +24,10 @@ class SecurityConfig(
         http.csrf { it.disable() }
 
         http.authorizeHttpRequests {
-            it.anyRequest().authenticated()
+            it.anyRequest().permitAll()
         }
 
-        http.addFilterBefore(databaseAuthorizationFilter(), AuthenticationFilter::class.java)
+        http.addFilterBefore(databaseAuthorizationFilter(), AuthorizationFilter::class.java)
         return http.build()
     }
 

@@ -1,5 +1,6 @@
 package me.devyonghee.securitydynamicacl.urlendpoint
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
@@ -18,6 +19,7 @@ class UrlEndpoint(
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now(),
     @Id
+    @Column(name = "url_endpoint_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int = 0,
 )

@@ -7,4 +7,3 @@ spring:
   docker:
     compose:
       file: ./security-dynamic-acl/docker-compose.yml
-

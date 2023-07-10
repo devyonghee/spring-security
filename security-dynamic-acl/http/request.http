@@ -1,5 +1,6 @@
 POST http://localhost:8080/books
 Content-Type: application/json
+Authorization: Basic yong 12345
 
 {
   "title": "The Lord of the Rings",
@@ -9,10 +10,17 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/books/1
+Authorization: Basic yong 12345
 
+###
+
+GET http://localhost:8080/books/1
+Authorization: Basic client 12345
+
+###
 
 GET http://localhost:8080/books
-
+Authorization: Basic client 12345
 
 ###
 
