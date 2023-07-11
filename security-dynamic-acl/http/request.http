@@ -7,21 +7,65 @@ Authorization: Basic yong 12345
   "body": "test"
 }
 
+> {%
+    client.assert(response.status === 200, "Response status is not 200");
+%}
+
+###
+
+POST http://localhost:8080/books
+Content-Type: application/json
+Authorization: Basic client 12345
+
+{
+  "title": "The Lord of the Rings",
+  "body": "test"
+}
+
+> {%
+    client.assert(response.status === 403, "Response status is not 403");
+%}
+
 ###
 
 GET http://localhost:8080/books/1
 Authorization: Basic yong 12345
 
+> {%
+    client.assert(response.status === 200, "Response status is not 200");
+%}
+
 ###
 
 GET http://localhost:8080/books/1
 Authorization: Basic client 12345
+
+> {%
+    client.assert(response.status === 200, "Response status is not 200");
+%}
+
+
+###
+
+GET http://localhost:8080/books/1
+
+> {%
+    client.assert(response.status === 403, "Response status is not 403");
+%}
 
 ###
 
 GET http://localhost:8080/books
 Authorization: Basic client 12345
 
+> {%
+    client.assert(response.status === 200, "Response status is not 200");
+%}
+
 ###
 
-GET http://localhost:8080/books/1
+GET http://localhost:8080/books
+
+> {%
+    client.assert(response.status === 200, "Response status is not 200");
+%}

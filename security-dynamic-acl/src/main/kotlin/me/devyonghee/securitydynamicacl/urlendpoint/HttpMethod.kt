@@ -9,7 +9,7 @@ enum class HttpMethod {
     PATCH,
     DELETE,
     OPTIONS,
-    TRACE,
+    TRACE
     ;
 
     val isAll: Boolean by lazy { this == ALL }

@@ -1,9 +1,9 @@
 package me.devyonghee.securitydynamicacl.config
 
 import me.devyonghee.securitydynamicacl.urlendpoint.UserRole
-import me.devyonghee.securitydynamicacl.urlendpoint.UserRoleUrlEndpointService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -12,27 +12,29 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.access.intercept.AuthorizationFilter
+import java.util.concurrent.TimeUnit
 
 @Configuration
 class SecurityConfig(
-    private val userRoleUrlEndpointService: UserRoleUrlEndpointService,
+    private val databaseRequestMatcherAuthorizationManager: DatabaseRequestMatcherAuthorizationManager
 ) {
+    @Scheduled(fixedDelay = 30, timeUnit = TimeUnit.SECONDS)
+    fun schedule() {
+        databaseRequestMatcherAuthorizationManager.reload()
+    }
+
     @Bean
     fun http(http: HttpSecurity): SecurityFilterChain {
-        http.httpBasic { it.disable() }
+        http.httpBasic { }
         http.cors { it.disable() }
         http.csrf { it.disable() }
 
-        http.authorizeHttpRequests {
-            it.anyRequest().permitAll()
-        }
-
-        http.addFilterBefore(databaseAuthorizationFilter(), AuthorizationFilter::class.java)
+        http.addFilterAt(databaseAuthorizationFilter(), AuthorizationFilter::class.java)
         return http.build()
     }
 
     fun databaseAuthorizationFilter(): AuthorizationFilter {
-        return AuthorizationFilter(DatabaseRequestMatcherAuthorizationManager(userRoleUrlEndpointService))
+        return AuthorizationFilter(databaseRequestMatcherAuthorizationManager)
     }
 
     @Bean

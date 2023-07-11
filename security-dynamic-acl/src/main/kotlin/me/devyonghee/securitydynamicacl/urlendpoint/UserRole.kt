@@ -11,11 +11,11 @@ import jakarta.persistence.Table
 class UserRole(
     @Id
     @Enumerated(EnumType.STRING)
-    val role: Role,
+    val role: Role
 ) {
     enum class Role {
         ADMIN,
         CLIENT,
-        ANONYMOUS,
+        ANONYMOUS
     }
 }

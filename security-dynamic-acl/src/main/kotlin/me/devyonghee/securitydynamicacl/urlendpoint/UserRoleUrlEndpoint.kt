@@ -27,7 +27,7 @@ class UserRoleUrlEndpoint(
     @Id
     @Column(name = "user_role_url_endpoint_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    val id: Int = 0
 ) {
     val httpMethod: HttpMethod
         get() = urlEndpoint.httpMethod

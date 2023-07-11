@@ -13,5 +13,5 @@ class Book(
     @Id
     @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    val id: Int = 0
 )

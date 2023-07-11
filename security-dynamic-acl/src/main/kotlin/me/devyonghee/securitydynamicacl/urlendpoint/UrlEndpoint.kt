@@ -21,5 +21,5 @@ class UrlEndpoint(
     @Id
     @Column(name = "url_endpoint_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int = 0,
+    val id: Int = 0
 )

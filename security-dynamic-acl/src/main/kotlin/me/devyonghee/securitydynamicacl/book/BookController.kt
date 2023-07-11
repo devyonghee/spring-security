@@ -28,6 +28,6 @@ class BookController(private val bookService: BookService) {
 
     class BookRequest(
         val title: String,
-        val body: String,
+        val body: String
     )
 }
